@@ -4,10 +4,12 @@ package com.example.courseworkserver.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "uniobjects")
 public class Uniobject {
@@ -24,5 +26,6 @@ public class Uniobject {
     @OneToOne
     @JoinColumn(name = "class_id",referencedColumnName = "id")
     private ClassEntity classEntity;
+
 
 }
