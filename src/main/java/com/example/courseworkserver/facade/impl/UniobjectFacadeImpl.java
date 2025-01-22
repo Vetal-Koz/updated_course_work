@@ -21,6 +21,7 @@ public class UniobjectFacadeImpl implements UniobjectFacade {
         Uniobject uniobject = new Uniobject();
         uniobject.setName(entity.getName());
         uniobject.setMajor(entity.getMajor());
+        uniobjectService.create(uniobject);
     }
 
     @Override

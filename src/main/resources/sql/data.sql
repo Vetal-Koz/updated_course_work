@@ -17,3 +17,12 @@ INSERT INTO classes (name, form) VALUES
     ('Technicalstaff', 'TechnicalstaffForm'),
     ('TextDocument', 'TextDocumentForm'),
     ('Uniobject', 'UniobjectForm');
+
+
+INSERT INTO class_relations (child_class_id, parent_class_id) VALUES
+    (1, 5),
+    (5, 1),
+    (6, 1),
+    (6, 5),
+    (1, 6),
+    (5, 6)

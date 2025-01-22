@@ -23,7 +23,7 @@ public class Uniobject {
 
     private Long major;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "class_id",referencedColumnName = "id")
     private ClassEntity classEntity;
 
