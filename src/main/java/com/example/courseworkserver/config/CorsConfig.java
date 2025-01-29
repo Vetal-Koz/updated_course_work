@@ -14,7 +14,7 @@ public class CorsConfig implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, DELETE, GET");
+        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, DELETE, GET, PATCH");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization");
 
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {

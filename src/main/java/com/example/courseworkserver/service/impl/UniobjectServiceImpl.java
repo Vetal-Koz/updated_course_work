@@ -30,6 +30,9 @@ public class UniobjectServiceImpl implements UniobjectService {
 
     @Override
     public void update(Uniobject entity) {
+        if (entity.getMajor() == 0) {
+            entity.setMajor(null);
+        }
         uniobjectRepository.save(entity);
     }
 

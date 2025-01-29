@@ -47,21 +47,13 @@ public class CourseWorkServerApplication {
         department.setMajor(1L);
         departmentService.create(department);
 
-        Student student = new Student();
-        student.setDateOfBirth(new Date());
-        student.setMajor(2L);
-        student.setAverageMark(10.1F);
-        student.setName("Person1");
-        student.setUniversityGroup("Group1");
-        student.setPracticalExperience(0);
-        student.setNationality("Ukraine");
-        studentService.create(student);
-
-        for (Object student1: repositoryService.getRepository(student.getClass()).findAll()) {
-            if (student1 instanceof Student) {
-                System.out.println(student1);
-            }
-        }
+        Department department2 = new Department();
+        department2.setChef("Chef3");
+        department2.setBudget(300F);
+        department2.setName("Dep2");
+        department2.setTeachingFocus("dsadsadas");
+        department2.setMajor(2L);
+        departmentService.create(department2);
     }
 
 }

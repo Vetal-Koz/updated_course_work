@@ -57,9 +57,23 @@ public class UniobjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody UniobjectRequest uniobjectRequest) {
-        uniobjectFacade.create(uniobjectRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Void> create(@RequestBody Map<String, Object> uniobjectRequest) {
+
+        try {
+            String entityClassName = String.valueOf(uniobjectRequest.remove("classEntityName"));
+            String fullClassEntityName =  "com.example.courseworkserver.dto.request."
+                    + entityClassName + "Request";
+            Class<?> entityClass = Class.forName(fullClassEntityName);
+            var convertValue = objectMapper.convertValue(uniobjectRequest, entityClass);
+            String fullClassEntityFacadeName = "com.example.courseworkserver.facade." + entityClassName + "Facade";
+            Class<?> facadeClass = Class.forName(fullClassEntityFacadeName);
+            CrudFacade entityFacade = (CrudFacade) context.getBean(facadeClass);
+            entityFacade.create((ApiRequest) convertValue);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @PutMapping("/{id}")
@@ -86,6 +100,12 @@ public class UniobjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         uniobjectFacade.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}/attach-to/{parentId}")
+    public ResponseEntity<Void> updateMajor(@PathVariable("id") Long id, @PathVariable("parentId") Long parentId) {
+        uniobjectFacade.updateMajor(id, parentId);
         return ResponseEntity.ok().build();
     }
 }

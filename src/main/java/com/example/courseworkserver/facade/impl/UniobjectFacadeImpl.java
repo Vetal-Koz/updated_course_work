@@ -61,4 +61,11 @@ public class UniobjectFacadeImpl implements UniobjectFacade {
     public List<String> findAllRelatedClassesNameById(Long id) {
         return uniobjectService.findAllRelatedClassesNameById(id);
     }
+
+    @Override
+    public void updateMajor(Long id, Long parentId) {
+        Uniobject uniobject = uniobjectService.findById(id);
+        uniobject.setMajor(parentId);
+        uniobjectService.update(uniobject);
+    }
 }

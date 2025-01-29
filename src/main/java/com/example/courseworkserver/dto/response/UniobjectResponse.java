@@ -20,8 +20,8 @@ public class UniobjectResponse extends ApiResponse{
 
     private String classEntityName;
     private List<?> items = new ArrayList<>();
-    private Boolean isDirectory = false;
-    private Boolean expanded = false;
+    private Boolean isDirectory = true;
+    private Boolean expanded = true;
 
     public UniobjectResponse(Uniobject uniobject) {
         setId(uniobject.getId());
