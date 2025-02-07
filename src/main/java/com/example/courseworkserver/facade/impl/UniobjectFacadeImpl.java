@@ -17,11 +17,12 @@ public class UniobjectFacadeImpl implements UniobjectFacade {
     private final UniobjectService uniobjectService;
 
     @Override
-    public void create(UniobjectRequest entity) {
+    public UniobjectResponse create(UniobjectRequest entity) {
         Uniobject uniobject = new Uniobject();
         uniobject.setName(entity.getName());
         uniobject.setMajor(entity.getMajor());
-        uniobjectService.create(uniobject);
+        Uniobject response = uniobjectService.create(uniobject);
+        return new UniobjectResponse(response);
     }
 
     @Override

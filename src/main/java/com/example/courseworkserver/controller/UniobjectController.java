@@ -57,8 +57,7 @@ public class UniobjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Map<String, Object> uniobjectRequest) {
-
+    public ResponseEntity<?> create(@RequestBody Map<String, Object> uniobjectRequest) {
         try {
             String entityClassName = String.valueOf(uniobjectRequest.remove("classEntityName"));
             String fullClassEntityName =  "com.example.courseworkserver.dto.request."
@@ -68,8 +67,8 @@ public class UniobjectController {
             String fullClassEntityFacadeName = "com.example.courseworkserver.facade." + entityClassName + "Facade";
             Class<?> facadeClass = Class.forName(fullClassEntityFacadeName);
             CrudFacade entityFacade = (CrudFacade) context.getBean(facadeClass);
-            entityFacade.create((ApiRequest) convertValue);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            var response = entityFacade.create((ApiRequest) convertValue);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseContainer<>(response));
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

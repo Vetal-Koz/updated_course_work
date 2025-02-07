@@ -17,10 +17,11 @@ public class StudentFacadeImpl implements StudentFacade {
 
     private final StudentService studentService;
     @Override
-    public void create(StudentRequest entity) {
+    public StudentResponse create(StudentRequest entity) {
         Student student = new Student();
         BeanUtils.copyProperties(entity, student);
-        studentService.create(student);
+        Student response = studentService.create(student);
+        return new StudentResponse(response);
     }
 
     @Override

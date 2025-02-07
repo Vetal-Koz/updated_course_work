@@ -17,10 +17,11 @@ public class FacultyFacadeImpl implements FacultyFacade {
     private final FacultyService facultyService;
 
     @Override
-    public void create(FacultyRequest entity) {
+    public FacultyResponse create(FacultyRequest entity) {
         Faculty faculty = new Faculty();
         BeanUtils.copyProperties(entity, faculty);
-        facultyService.create(faculty);
+        Faculty response = facultyService.create(faculty);
+        return new FacultyResponse(response);
     }
 
     @Override

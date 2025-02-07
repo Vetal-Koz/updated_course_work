@@ -17,10 +17,11 @@ import java.util.List;
 public class SubdivisionFacadeImpl implements SubdivisionFacade {
     private final SubdivisionService subdivisionService;
     @Override
-    public void create(SubdivisionRequest entity) {
+    public SubdivisionResponse create(SubdivisionRequest entity) {
         Subdivision subdivision = new Subdivision();
         BeanUtils.copyProperties(entity, subdivision);
-        subdivisionService.create(subdivision);
+        Subdivision response = subdivisionService.create(subdivision);
+        return new SubdivisionResponse(response);
     }
 
     @Override

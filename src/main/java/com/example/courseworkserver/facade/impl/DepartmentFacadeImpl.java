@@ -17,10 +17,11 @@ public class DepartmentFacadeImpl implements DepartmentFacade {
     private final DepartmentService departmentService;
 
     @Override
-    public void create(DepartmentRequest entity) {
+    public DepartmentResponse create(DepartmentRequest entity) {
         Department department = new Department();
         BeanUtils.copyProperties(entity, department);
-        departmentService.create(department);
+        Department response = departmentService.create(department);
+        return new DepartmentResponse(response);
     }
 
     @Override

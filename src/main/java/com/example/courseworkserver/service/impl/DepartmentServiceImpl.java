@@ -20,11 +20,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final ClassEntityRepository classEntityRepository;
 
     @Override
-    public void create(Department entity) {
+    public Department create(Department entity) {
         ClassEntity classEntity = classEntityRepository.findClassByName("Department")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
-        departmentRepository.save(entity);
+        return departmentRepository.save(entity);
     }
 
     @Override

@@ -20,11 +20,11 @@ public class StudentServiceImpl implements StudentService {
     private final ClassEntityRepository classEntityRepository;
 
     @Override
-    public void create(Student entity) {
+    public Student create(Student entity) {
         ClassEntity classEntity = classEntityRepository.findClassByName("Student")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
-        studentRepository.save(entity);
+        return studentRepository.save(entity);
     }
 
     @Override

@@ -20,11 +20,11 @@ public class FacultyServiceImpl implements FacultyService {
     private final ClassEntityRepository classEntityRepository;
 
     @Override
-    public void create(Faculty entity) {
+    public Faculty create(Faculty entity) {
         ClassEntity classEntity = classEntityRepository.findClassByName("Faculty")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
-        facultyRepository.save(entity);
+        return facultyRepository.save(entity);
     }
 
     @Override

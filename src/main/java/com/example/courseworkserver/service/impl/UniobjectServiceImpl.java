@@ -21,11 +21,11 @@ public class UniobjectServiceImpl implements UniobjectService {
     private final ClassEntityRepository classEntityRepository;
 
     @Override
-    public void create(Uniobject entity) {
+    public Uniobject create(Uniobject entity) {
         ClassEntity classEntity = classEntityRepository.findClassByName("Uniobject")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
-        uniobjectRepository.save(entity);
+        return uniobjectRepository.save(entity);
     }
 
     @Override

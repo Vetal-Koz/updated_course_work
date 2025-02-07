@@ -16,10 +16,11 @@ import java.util.List;
 public class PersonFacadeImpl implements PersonFacade {
     private final PersonService personService;
     @Override
-    public void create(PersonRequest entity) {
+    public PersonResponse create(PersonRequest entity) {
         Person person = new Person();
         BeanUtils.copyProperties(entity, person);
-        personService.create(person);
+        Person response = personService.create(person);
+        return new PersonResponse(response);
     }
 
     @Override

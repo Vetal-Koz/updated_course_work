@@ -35,6 +35,7 @@ public class CourseWorkServerApplication {
     private void test() {
         Faculty faculty = new Faculty();
         faculty.setChef("Chef1");
+        faculty.setCurricula("Curricula1");
         faculty.setFacultyLocation("Location1");
         faculty.setName("Fac1");
         facultyService.create(faculty);

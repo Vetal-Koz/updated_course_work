@@ -10,5 +10,6 @@ public class UniobjectRequest extends ApiRequest {
     private String name;
 
     private Long major;
+
     private String classEntityName;
 }
