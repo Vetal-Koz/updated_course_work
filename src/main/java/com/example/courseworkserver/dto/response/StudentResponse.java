@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+import java.text.SimpleDateFormat;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,5 +19,8 @@ public class StudentResponse extends PersonResponse {
 
     public StudentResponse(Student student) {
         BeanUtils.copyProperties(student, this);
+        setClassEntityName(student.getClassEntity().getName());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        setDateOfBirth(formatter.format(student.getDateOfBirth()));
     }
 }

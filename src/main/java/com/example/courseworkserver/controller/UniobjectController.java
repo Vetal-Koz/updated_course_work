@@ -2,8 +2,6 @@ package com.example.courseworkserver.controller;
 
 
 import com.example.courseworkserver.dto.request.ApiRequest;
-import com.example.courseworkserver.dto.request.FacultyRequest;
-import com.example.courseworkserver.dto.request.UniobjectRequest;
 import com.example.courseworkserver.dto.response.ResponseContainer;
 import com.example.courseworkserver.dto.response.UniobjectResponse;
 import com.example.courseworkserver.facade.CrudFacade;
@@ -36,6 +34,11 @@ public class UniobjectController {
         return ResponseEntity.ok().body(new ResponseContainer<>(uniobjectFacade.findAllWithMajorNull()));
     }
 
+    @GetMapping("/root/classes")
+    public ResponseEntity<ResponseContainer<List<String>>> getAllClasses() {
+        return ResponseEntity.ok().body(new ResponseContainer<>(uniobjectFacade.findAllClassesName()));
+    }
+
     @GetMapping("/{id}/related")
     public ResponseEntity<ResponseContainer<List<UniobjectResponse>>> getAllWhereMajorIs(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(new ResponseContainer<>(uniobjectFacade.findAllByMajorIs(id)));
@@ -59,6 +62,7 @@ public class UniobjectController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Map<String, Object> uniobjectRequest) {
         try {
+            uniobjectRequest.remove("chef");
             String entityClassName = String.valueOf(uniobjectRequest.remove("classEntityName"));
             String fullClassEntityName =  "com.example.courseworkserver.dto.request."
                     + entityClassName + "Request";
@@ -79,6 +83,7 @@ public class UniobjectController {
     public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody Map<String, Object> uniobjectRequest) {
         try {
             uniobjectRequest.remove("id");
+            uniobjectRequest.remove("chef");
             String entityClassName = String.valueOf(uniobjectRequest.remove("classEntityName"));
             String fullClassEntityName =  "com.example.courseworkserver.dto.request."
                     + entityClassName + "Request";

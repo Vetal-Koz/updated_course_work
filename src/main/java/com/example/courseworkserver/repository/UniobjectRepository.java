@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface UniobjectRepository extends JpaRepository<Uniobject, Long> {
 
+    @Query("SELECT uni FROM Uniobject uni WHERE uni.major IS NULL OR uni.major = 0")
     List<Uniobject> findAllByMajorIsNull();
 
     List<Uniobject> findAllByMajorIs(Long major);

@@ -2,6 +2,8 @@ package com.example.courseworkserver.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,8 @@ import lombok.ToString;
 @Table(name = "subdivisions")
 public class Subdivision extends Uniobject {
 
-    private String chef;
+    @ManyToOne
+    @JoinColumn(name = "chef_id", nullable = true)
+    private Person chef;
 
 }

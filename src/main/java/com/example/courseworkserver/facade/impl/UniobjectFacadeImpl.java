@@ -60,7 +60,7 @@ public class UniobjectFacadeImpl implements UniobjectFacade {
 
     @Override
     public List<String> findAllRelatedClassesNameById(Long id) {
-        return uniobjectService.findAllRelatedClassesNameById(id);
+        return uniobjectService.findAllRelatedClassesNameByEntityId(id);
     }
 
     @Override
@@ -68,5 +68,10 @@ public class UniobjectFacadeImpl implements UniobjectFacade {
         Uniobject uniobject = uniobjectService.findById(id);
         uniobject.setMajor(parentId);
         uniobjectService.update(uniobject);
+    }
+
+    @Override
+    public List<String> findAllClassesName() {
+        return uniobjectService.findAllClassesName();
     }
 }

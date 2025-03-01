@@ -42,6 +42,9 @@ public class PersonFacadeImpl implements PersonFacade {
 
     @Override
     public List<PersonResponse> findAll() {
-        return personService.findAll().stream().map(PersonResponse::new).toList();
+        return personService.findAll()
+                .stream()
+                .map(PersonResponse::new)
+                .toList();
     }
 }

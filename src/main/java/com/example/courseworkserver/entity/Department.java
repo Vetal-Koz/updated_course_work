@@ -20,6 +20,6 @@ public class Department extends Subdivision{
     @Column(name = "teaching_focus")
     private String teachingFocus;
 
-    private Float budget;
+    private Double budget;
 
 }

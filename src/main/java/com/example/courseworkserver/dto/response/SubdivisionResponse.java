@@ -16,6 +16,6 @@ public class SubdivisionResponse extends UniobjectResponse {
         setName(subdivision.getName());
         setMajor(subdivision.getMajor());
         setClassEntityName(subdivision.getClassEntity().getName());
-        this.chef = subdivision.getChef();
+        this.chef = subdivision.getChef().getName();
     }
 }

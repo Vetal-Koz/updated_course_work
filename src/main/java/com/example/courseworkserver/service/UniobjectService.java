@@ -10,5 +10,7 @@ public interface UniobjectService extends CrudService<Uniobject> {
 
     List<Uniobject> findAllByMajorIs(Long major);
 
-    List<String> findAllRelatedClassesNameById(Long id);
+    List<String> findAllRelatedClassesNameByEntityId(Long id);
+
+    List<String> findAllClassesName();
 }

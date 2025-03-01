@@ -7,4 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DepartmentRequest extends SubdivisionRequest {
+    public String teachingFocus;
+    public Double budget;
 }

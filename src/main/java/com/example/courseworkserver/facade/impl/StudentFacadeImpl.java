@@ -43,6 +43,8 @@ public class StudentFacadeImpl implements StudentFacade {
 
     @Override
     public List<StudentResponse> findAll() {
-        return studentService.findAll().stream().map(StudentResponse::new).toList();
+        return studentService.findAll().stream()
+                .map(StudentResponse::new)
+                .toList();
     }
 }

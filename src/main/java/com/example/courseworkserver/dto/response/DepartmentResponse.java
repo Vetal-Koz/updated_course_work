@@ -11,14 +11,14 @@ import lombok.Setter;
 public class DepartmentResponse extends SubdivisionResponse {
     private String teachingFocus;
 
-    private Float budget;
+    private Double budget;
 
     public DepartmentResponse(Department department) {
         setId(department.getId());
         setName(department.getName());
         setMajor(department.getMajor());
         setClassEntityName(department.getClassEntity().getName());
-        setChef(department.getChef());
+        setChef(department.getChef().getName());
         this.teachingFocus = department.getTeachingFocus();
         this.budget = department.getBudget();
     }

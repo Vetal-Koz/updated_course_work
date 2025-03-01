@@ -63,7 +63,15 @@ public class UniobjectServiceImpl implements UniobjectService {
     }
 
     @Override
-    public List<String> findAllRelatedClassesNameById(Long id) {
-        return uniobjectRepository.findAllRelatedClassesById(id);
+    public List<String> findAllRelatedClassesNameByEntityId(Long id) {
+        Uniobject uniobject = uniobjectRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+        ClassEntity searchedClass = uniobject.getClassEntity();
+        return uniobjectRepository.findAllRelatedClassesById(searchedClass.getId());
+    }
+
+    @Override
+    public List<String> findAllClassesName() {
+        return classEntityRepository.findAll().stream().map(ClassEntity::getName).toList();
     }
 }

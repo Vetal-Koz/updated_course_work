@@ -19,7 +19,7 @@ public class FacultyResponse extends SubdivisionResponse {
         setName(faculty.getName());
         setMajor(faculty.getMajor());
         setClassEntityName(faculty.getClassEntity().getName());
-        setChef(faculty.getChef());
+        setChef(faculty.getChef().getName());
         this.curricula = faculty.getCurricula();
         this.facultyLocation = faculty.getFacultyLocation();
     }

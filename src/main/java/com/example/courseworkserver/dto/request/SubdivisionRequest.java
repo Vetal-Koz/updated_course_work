@@ -7,5 +7,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SubdivisionRequest extends UniobjectRequest {
-    public String chef;
+    public Long chefId;
 }

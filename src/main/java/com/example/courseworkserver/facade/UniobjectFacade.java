@@ -12,6 +12,7 @@ public interface UniobjectFacade extends CrudFacade<UniobjectRequest, UniobjectR
     List<UniobjectResponse> findAllByMajorIs(Long major);
 
     List<String> findAllRelatedClassesNameById(Long id);
+    List<String> findAllClassesName();
     void updateMajor(Long id, Long parentId);
 }
 
