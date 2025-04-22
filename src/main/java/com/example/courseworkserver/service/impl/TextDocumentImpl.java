@@ -21,7 +21,7 @@ public class TextDocumentImpl implements TextDocumentService {
 
     @Override
     public TextDocument create(TextDocument entity) {
-        ClassEntity classEntity = classEntityRepository.findClassByName("TextDocument")
+        ClassEntity classEntity = classEntityRepository.findClassByNameIgnoreCase("TextDocument")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
         return textDocumentRepository.save(entity);

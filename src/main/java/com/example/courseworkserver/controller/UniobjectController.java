@@ -2,8 +2,11 @@ package com.example.courseworkserver.controller;
 
 
 import com.example.courseworkserver.dto.request.ApiRequest;
+import com.example.courseworkserver.dto.request.ClassRequest;
+import com.example.courseworkserver.dto.response.ClassResponse;
 import com.example.courseworkserver.dto.response.ResponseContainer;
 import com.example.courseworkserver.dto.response.UniobjectResponse;
+import com.example.courseworkserver.facade.ClassFacade;
 import com.example.courseworkserver.facade.CrudFacade;
 import com.example.courseworkserver.facade.UniobjectFacade;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +25,7 @@ import java.util.Map;
 public class UniobjectController {
     private final UniobjectFacade uniobjectFacade;
     private final ApplicationContext context;
+    private final ClassFacade classFacade;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @GetMapping()
@@ -111,5 +115,12 @@ public class UniobjectController {
     public ResponseEntity<Void> updateMajor(@PathVariable("id") Long id, @PathVariable("parentId") Long parentId) {
         uniobjectFacade.updateMajor(id, parentId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/classes/{name}")
+    public ResponseEntity<ClassResponse> getClassByName(@PathVariable("name") String name) {
+        ClassRequest request = new ClassRequest();
+        request.setClassName(name);
+        return ResponseEntity.ok(classFacade.findByClassName(request));
     }
 }

@@ -19,6 +19,7 @@ public class DepartmentResponse extends SubdivisionResponse {
         setMajor(department.getMajor());
         setClassEntityName(department.getClassEntity().getName());
         setChef(department.getChef().getName());
+        setChefId(department.getChef().getId());
         this.teachingFocus = department.getTeachingFocus();
         this.budget = department.getBudget();
     }

@@ -43,17 +43,20 @@ public class CourseWorkServerApplication {
         dean1.setDateOfBirth(new Date());
         dean1.setSex("Чол.");
         dean1.setNationality("Українець");
+        dean1.setMajor(2L);
         personService.create(dean1);
 
         faculty1.setChef(dean1);
         facultyService.create(faculty1);
+
+
 
 // Створення кафедри в факультеті
         Department department1 = new Department();
         department1.setName("Кафедра теоретичної та прикладної інформатики");
         department1.setBudget(700000.0);
         department1.setTeachingFocus("Алгоритми, аналіз даних, штучний інтелект");
-        department1.setMajor(1L);
+        department1.setMajor(2L);
 
 // Створення завідувача кафедри
         Person headOfDepartment1 = new Person();
@@ -61,6 +64,7 @@ public class CourseWorkServerApplication {
         headOfDepartment1.setDateOfBirth(new Date());
         headOfDepartment1.setSex("Жін.");
         headOfDepartment1.setNationality("Українка");
+        headOfDepartment1.setMajor(3L);
         personService.create(headOfDepartment1);
 
         department1.setChef(headOfDepartment1);
@@ -71,7 +75,7 @@ public class CourseWorkServerApplication {
         student1.setNationality("Українець");
         student1.setUniversityGroup("ПМІ-45");
         student1.setName("Гнатюк Андрій Олегович");
-        student1.setMajor(1L);
+        student1.setMajor(3L);
         student1.setSex("Чол.");
         student1.setDateOfBirth(new Date());
         student1.setPracticalExperience(2);
@@ -82,7 +86,7 @@ public class CourseWorkServerApplication {
         student2.setNationality("Українка");
         student2.setUniversityGroup("ПМІ-42");
         student2.setName("Іваненко Олена Сергіївна");
-        student2.setMajor(1L);
+        student2.setMajor(3L);
         student2.setSex("Жін.");
         student2.setDateOfBirth(new Date());
         student2.setPracticalExperience(1);
@@ -101,6 +105,7 @@ public class CourseWorkServerApplication {
         dean2.setDateOfBirth(new Date());
         dean2.setSex("Чол.");
         dean2.setNationality("Українець");
+        dean2.setMajor(8L);
         personService.create(dean2);
 
         faculty2.setChef(dean2);
@@ -119,6 +124,7 @@ public class CourseWorkServerApplication {
         headOfDepartment2.setDateOfBirth(new Date());
         headOfDepartment2.setSex("Чол.");
         headOfDepartment2.setNationality("Українець");
+        headOfDepartment2.setMajor(8L);
         personService.create(headOfDepartment2);
 
         department2.setChef(headOfDepartment2);
@@ -127,9 +133,9 @@ public class CourseWorkServerApplication {
 // Створення студентів, які навчаються на цій кафедрі
         Student student3 = new Student();
         student3.setNationality("Українець");
-        student3.setUniversityGroup("КСМ-32");
+        student3.setUniversityGroup("ПМІ-44");
         student3.setName("Козієнко Віталій");
-        student3.setMajor(2L);
+        student3.setMajor(4L);
         student3.setSex("Чол.");
         student3.setDateOfBirth(new Date());
         student3.setPracticalExperience(1);

@@ -10,7 +10,6 @@ import com.example.courseworkserver.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -22,7 +21,7 @@ public class UniobjectServiceImpl implements UniobjectService {
 
     @Override
     public Uniobject create(Uniobject entity) {
-        ClassEntity classEntity = classEntityRepository.findClassByName("Uniobject")
+        ClassEntity classEntity = classEntityRepository.findClassByNameIgnoreCase("Uniobject")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
         return uniobjectRepository.save(entity);

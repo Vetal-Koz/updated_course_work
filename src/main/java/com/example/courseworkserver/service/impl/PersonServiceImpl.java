@@ -21,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person create(Person entity) {
-        ClassEntity classEntity = classEntityRepository.findClassByName("Person")
+        ClassEntity classEntity = classEntityRepository.findClassByNameIgnoreCase("Person")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
         return personRepository.save(entity);

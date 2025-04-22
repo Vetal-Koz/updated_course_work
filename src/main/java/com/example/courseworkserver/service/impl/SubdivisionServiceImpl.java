@@ -21,7 +21,7 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
     @Override
     public Subdivision create(Subdivision entity) {
-        ClassEntity classEntity = classEntityRepository.findClassByName("Subdivision")
+        ClassEntity classEntity = classEntityRepository.findClassByNameIgnoreCase("Subdivision")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
         return subdivisionRepository.save(entity);

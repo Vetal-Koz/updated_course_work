@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SubdivisionResponse extends UniobjectResponse {
     private String chef;
+    private Long chefId;
 
     public SubdivisionResponse(Subdivision subdivision) {
         setId(subdivision.getId());
@@ -17,5 +18,6 @@ public class SubdivisionResponse extends UniobjectResponse {
         setMajor(subdivision.getMajor());
         setClassEntityName(subdivision.getClassEntity().getName());
         this.chef = subdivision.getChef().getName();
+        this.chefId = subdivision.getChef().getId();
     }
 }

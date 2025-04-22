@@ -21,7 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department create(Department entity) {
-        ClassEntity classEntity = classEntityRepository.findClassByName("Department")
+        ClassEntity classEntity = classEntityRepository.findClassByNameIgnoreCase("Department")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
         return departmentRepository.save(entity);

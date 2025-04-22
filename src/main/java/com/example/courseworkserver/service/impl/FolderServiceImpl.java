@@ -21,7 +21,7 @@ public class FolderServiceImpl implements FolderService {
 
     @Override
     public Folder create(Folder entity) {
-        ClassEntity classEntity = classEntityRepository.findClassByName("Folder")
+        ClassEntity classEntity = classEntityRepository.findClassByNameIgnoreCase("Folder")
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionUtil.ENTITY_NOT_FOUND.getMessage()));
         entity.setClassEntity(classEntity);
         return folderRepository.save(entity);
