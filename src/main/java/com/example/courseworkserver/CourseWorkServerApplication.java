@@ -1,9 +1,6 @@
 package com.example.courseworkserver;
 
-import com.example.courseworkserver.entity.Department;
-import com.example.courseworkserver.entity.Faculty;
-import com.example.courseworkserver.entity.Person;
-import com.example.courseworkserver.entity.Student;
+import com.example.courseworkserver.entity.*;
 import com.example.courseworkserver.repository.FacultyRepository;
 import com.example.courseworkserver.repository.UniobjectRepository;
 import com.example.courseworkserver.service.*;
@@ -141,6 +138,7 @@ public class CourseWorkServerApplication {
         student3.setPracticalExperience(1);
         student3.setAverageMark(95.6F);
         studentService.create(student3);
+
 
 
 

@@ -6,6 +6,7 @@ import com.example.courseworkserver.exception.EntityNotFoundException;
 import com.example.courseworkserver.repository.ClassEntityRepository;
 import com.example.courseworkserver.repository.FacultyRepository;
 import com.example.courseworkserver.service.FacultyService;
+import com.example.courseworkserver.service.SubdivisionService;
 import com.example.courseworkserver.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository facultyRepository;
     private final ClassEntityRepository classEntityRepository;
+    private final SubdivisionService subdivisionService;
 
     @Override
     public Faculty create(Faculty entity) {

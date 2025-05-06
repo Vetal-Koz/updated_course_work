@@ -6,6 +6,7 @@ import com.example.courseworkserver.exception.EntityNotFoundException;
 import com.example.courseworkserver.repository.ClassEntityRepository;
 import com.example.courseworkserver.repository.PersonRepository;
 import com.example.courseworkserver.service.PersonService;
+import com.example.courseworkserver.service.UniobjectService;
 import com.example.courseworkserver.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final ClassEntityRepository classEntityRepository;
+    private final UniobjectService uniobjectService;
 
     @Override
     public Person create(Person entity) {
@@ -46,5 +48,10 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    @Override
+    public void ExpelFromUniversity() {
+        System.out.println("Person expel from university");
     }
 }

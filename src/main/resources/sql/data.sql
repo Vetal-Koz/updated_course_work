@@ -33,4 +33,8 @@ INSERT INTO class_relations (child_class_id, parent_class_id) VALUES
     -- Кафедра містить викладачів, студентів, документи
     (15, 1), -- Викладач належить кафедрі
     (13, 1), -- Студент може бути прив'язаний до кафедри
-    (2, 1) -- Документ пов'язаний з кафедрою
+    (2, 1); -- Документ пов'язаний з кафедрою
+
+
+INSERT INTO methods (class_id, form, method_name) VALUES
+    (13, 'ExpelForm', 'ExpelFromUniversity')

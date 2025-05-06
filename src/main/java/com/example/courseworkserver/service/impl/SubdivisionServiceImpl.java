@@ -6,6 +6,7 @@ import com.example.courseworkserver.exception.EntityNotFoundException;
 import com.example.courseworkserver.repository.ClassEntityRepository;
 import com.example.courseworkserver.repository.SubdivisionRepository;
 import com.example.courseworkserver.service.SubdivisionService;
+import com.example.courseworkserver.service.UniobjectService;
 import com.example.courseworkserver.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
     private final SubdivisionRepository subdivisionRepository;
     private final ClassEntityRepository classEntityRepository;
+    private final UniobjectService uniobjectService;
 
     @Override
     public Subdivision create(Subdivision entity) {

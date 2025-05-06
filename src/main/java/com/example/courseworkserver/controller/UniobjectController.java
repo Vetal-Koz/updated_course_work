@@ -4,18 +4,28 @@ package com.example.courseworkserver.controller;
 import com.example.courseworkserver.dto.request.ApiRequest;
 import com.example.courseworkserver.dto.request.ClassRequest;
 import com.example.courseworkserver.dto.response.ClassResponse;
+import com.example.courseworkserver.dto.response.MethodEntityResponse;
 import com.example.courseworkserver.dto.response.ResponseContainer;
 import com.example.courseworkserver.dto.response.UniobjectResponse;
+import com.example.courseworkserver.entity.MethodEntity;
 import com.example.courseworkserver.facade.ClassFacade;
 import com.example.courseworkserver.facade.CrudFacade;
+import com.example.courseworkserver.facade.MethodEntityFacade;
 import com.example.courseworkserver.facade.UniobjectFacade;
+import com.example.courseworkserver.service.MethodEntityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.boot.ApplicationContextFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +36,8 @@ public class UniobjectController {
     private final UniobjectFacade uniobjectFacade;
     private final ApplicationContext context;
     private final ClassFacade classFacade;
+    private final MethodEntityFacade methodEntityFacade;
+    private final MethodEntityService methodEntityService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @GetMapping()
@@ -122,5 +134,84 @@ public class UniobjectController {
         ClassRequest request = new ClassRequest();
         request.setClassName(name);
         return ResponseEntity.ok(classFacade.findByClassName(request));
+    }
+
+    @GetMapping("{className}/methods")
+    public ResponseEntity<List<MethodEntityResponse>> getMethodsByClassName(@PathVariable("className") String className) {
+        return ResponseEntity.ok(methodEntityFacade.findByClassEntityName(className));
+    }
+
+    @PostMapping("methods/invoke/{methodId}")
+    public ResponseEntity<?> invokeMethodById(@PathVariable("methodId") Long methodId,
+                                              @RequestBody Map<String, Object> methodRequest)
+            throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        MethodEntity method = methodEntityService.findById(methodId);
+        String fullServiceName =  "com.example.courseworkserver.service."
+                + method.getClassEntity().getName() + "Service";
+        Class<?> serviceClass = Class.forName(fullServiceName);
+        Object service = context.getBean(serviceClass);
+
+        Method[] methods = serviceClass.getDeclaredMethods();
+        Method matchingMethod = null;
+
+        for (Method m : methods) {
+            if (m.getName().equals(method.getMethodName())) {
+                // Check if all required parameters are present in methodRequest
+                boolean allMatch = Arrays.stream(m.getParameters())
+                        .allMatch(param -> methodRequest.containsKey(param.getName()));
+                if (allMatch) {
+                    matchingMethod = m;
+                    break;
+                }
+            }
+        }
+
+        if (matchingMethod == null) {
+            throw new NoSuchMethodException("No matching method found");
+        }
+
+        Parameter[] parameters = matchingMethod.getParameters();
+        Object[] args = new Object[parameters.length];
+
+        for (int i = 0; i < parameters.length; i++) {
+            Parameter parameter = parameters[i];
+            String paramName = parameter.getName();
+            Class<?> paramType = parameter.getType();
+
+            Object rawValue = methodRequest.get(paramName);
+            Object convertedValue = convertValue(rawValue, paramType);
+            args[i] = convertedValue;
+        }
+
+        // Step 5: Invoke method
+        matchingMethod.setAccessible(true);
+        matchingMethod.invoke(service, args);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
+    private Object convertValue(Object value, Class<?> targetType) {
+        if (value == null) return null;
+
+        if (targetType.isInstance(value)) {
+            return value;
+        }
+
+        if (targetType == Integer.class || targetType == int.class) {
+            return Integer.parseInt(value.toString());
+        } else if (targetType == Long.class || targetType == long.class) {
+            return Long.parseLong(value.toString());
+        } else if (targetType == Double.class || targetType == double.class) {
+            return Double.parseDouble(value.toString());
+        } else if (targetType == Boolean.class || targetType == boolean.class) {
+            return Boolean.parseBoolean(value.toString());
+        } else if (targetType == String.class) {
+            return value.toString();
+        } else {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.convertValue(value, targetType);
+        }
     }
 }

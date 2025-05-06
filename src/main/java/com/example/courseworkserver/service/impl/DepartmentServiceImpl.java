@@ -6,6 +6,7 @@ import com.example.courseworkserver.exception.EntityNotFoundException;
 import com.example.courseworkserver.repository.ClassEntityRepository;
 import com.example.courseworkserver.repository.DepartmentRepository;
 import com.example.courseworkserver.service.DepartmentService;
+import com.example.courseworkserver.service.SubdivisionService;
 import com.example.courseworkserver.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
     private final ClassEntityRepository classEntityRepository;
+    private final SubdivisionService subdivisionService;
+
 
     @Override
     public Department create(Department entity) {
